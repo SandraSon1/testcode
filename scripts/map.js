@@ -6,6 +6,8 @@ function initialize() {
           center: {lat: -41.2865, lng: 174.7762},
           zoom: 15
         };
+
+        
       
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -24,12 +26,15 @@ function GeolocationControl(controlDiv, map) {
         google.maps.event.addDomListener(controlUI, 'click', geolocate);
 }
 
+
+
 function geolocate() {
 
     if (navigator.geolocation) {
 
-        navigator.geolocation.watchPosition(function (position) {
-
+       const watchId= navigator.geolocation.watchPosition(function (position) {
+ window.localStorage.setItem('lastWatch', watchId);
+  console.log('Set watchId', watchId);
             var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
             // Create a marker and center map on user location
@@ -50,6 +55,14 @@ function geolocate() {
      
 
         });
+       
+        function onLocationChange(coordinates) {
+        const { latitude, longitude } = coordinates.coords;
+        console.log('Changed coordinates: ', latitude, longitude);
+        }
+
+
+        
     } 
 
     else {
