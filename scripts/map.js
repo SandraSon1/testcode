@@ -1,4 +1,5 @@
 var map;
+var marker=null;
 
 function initialize() {
 
@@ -32,12 +33,21 @@ function geolocate() {
 
     if (navigator.geolocation) {
 
-       const watchId= navigator.geolocation.watchPosition(function (position) {
- window.localStorage.setItem('lastWatch', watchId);
-  console.log('Set watchId', watchId);
+        var optn = {
+            enableHighAccuracy: true,
+            timeout: Infinity,
+            maximumAge:0
+
+        };
+
+        const watchId= navigator.geolocation.watchPosition(function (position) {
+        window.localStorage.setItem('lastWatch', watchId);
+        console.log('Set watchId', watchId);
+
             var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
             // Create a marker and center map on user location
+            if (marker==null){
             marker = new google.maps.Marker({
                 position: pos,
                 draggable: true,
@@ -45,6 +55,13 @@ function geolocate() {
                 map: map
 
             });
+
+            marker.setMap(map);
+        }
+        else{
+            marker.setPosition(pos);
+
+        }
 
             map.setCenter(pos);
 
@@ -56,18 +73,22 @@ function geolocate() {
 
         });
        
-        function onLocationChange(coordinates) {
-        const { latitude, longitude } = coordinates.coords;
-        console.log('Changed coordinates: ', latitude, longitude);
-        }
+        // function onLocationChange(coordinates) {
+        // const { latitude, longitude } = coordinates.coords;
+        // console.log('Changed coordinates: ', latitude, longitude);
+        // }
 
 
         
     } 
-
-    else {
+   else {
+        marker.setPosition(myLatlng);
          document.getElementById("startWalking").innerHTML = "Geolocation is not supported by this browser.";
+        
     }
+
 }
 
+
 initialize();
+
