@@ -20,6 +20,7 @@ function initialize() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(geolocationDiv);
 }
 
+
 function GeolocationControl(controlDiv, map) {
 
         var controlUI = document.getElementById('mapbutt');
@@ -50,7 +51,7 @@ function geolocate() {
             if (marker==null){
             marker = new google.maps.Marker({
                 position: pos,
-                draggable: true,
+                draggable: false,
                 animation: google.maps.Animation.DROP,
                 map: map
 
@@ -58,10 +59,20 @@ function geolocate() {
 
             marker.setMap(map);
         }
-        else{
-            marker.setPosition(pos);
+         else{
+                marker.setPosition(pos);
 
-        }
+            }
+
+            function onLocationChange(pos) {
+            const { latitude, longitude } = coordinates.coords;
+            console.log('Changed coordinates: ', latitude, longitude);
+            }
+            
+            // else{
+            //     marker.setPosition(pos);
+
+            // }
 
             map.setCenter(pos);
 
@@ -72,20 +83,12 @@ function geolocate() {
      
 
         });
-       
-        // function onLocationChange(coordinates) {
-        // const { latitude, longitude } = coordinates.coords;
-        // console.log('Changed coordinates: ', latitude, longitude);
-        // }
+      
 
 
         
     } 
-   else {
-        marker.setPosition(myLatlng);
-         document.getElementById("startWalking").innerHTML = "Geolocation is not supported by this browser.";
-        
-    }
+  
 
 }
 
