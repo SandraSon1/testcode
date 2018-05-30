@@ -20,6 +20,23 @@ function initialize() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(geolocationDiv);
 }
 
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+
 
 function GeolocationControl(controlDiv, map) {
 
@@ -28,9 +45,6 @@ function GeolocationControl(controlDiv, map) {
         google.maps.event.addDomListener(controlUI, 'click', geolocate);
 }
 
-function error(){
-    alert('ERROR(' + error.code + '): ' + error.message);
-}
 
 
 function geolocate() {
@@ -44,7 +58,7 @@ function geolocate() {
 
         };
 
-        const watchId= navigator.geolocation.watchPosition(function (error, position) {
+        const watchId= navigator.geolocation.watchPosition(function (position, showError) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
 
@@ -64,7 +78,6 @@ function geolocate() {
         }
          else{
                 marker.setPosition(pos);
-                 alert('ERROR(' + error.code + '): ' + error.message);
 
             }
 
