@@ -28,6 +28,9 @@ function GeolocationControl(controlDiv, map) {
         google.maps.event.addDomListener(controlUI, 'click', geolocate);
 }
 
+function error(){
+    alert('ERROR(' + error.code + '): ' + error.message);
+}
 
 
 function geolocate() {
@@ -41,7 +44,7 @@ function geolocate() {
 
         };
 
-        const watchId= navigator.geolocation.watchPosition(function (position) {
+        const watchId= navigator.geolocation.watchPosition(function (error, position) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
 
@@ -61,6 +64,7 @@ function geolocate() {
         }
          else{
                 marker.setPosition(pos);
+                 alert('ERROR(' + error.code + '): ' + error.message);
 
             }
 
