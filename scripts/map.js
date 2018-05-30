@@ -20,6 +20,8 @@ function initialize() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(geolocationDiv);
 }
 
+var x = document.getElementById("startWalking");
+
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
