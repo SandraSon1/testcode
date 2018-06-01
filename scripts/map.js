@@ -1,26 +1,52 @@
 var map;
 var marker=null;
+var bounds = null;
+var directionsService = null;
+var directionsDisplay = null;
 
-function initialize() {
 
-    var mapOptions = {
+ var mapOptions = {
           center: {lat: -41.2865, lng: 174.7762},
           zoom: 15
         };
 
-        
-      
+
+function initialize() {
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    bounds = new google.maps.LatLngBounds();
+
+
 
     // Create the DIV to hold the control and call the constructor passing in this DIV
-    var geolocationDiv = document.createElement('div');
+    var geolocationDiv;
     var geolocationControl = new GeolocationControl(geolocationDiv, map);
-
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(geolocationDiv);
+      directionsService = new google.maps.DirectionsService;
+      directionsDisplay = new google.maps.DirectionsRenderer;
 }
 
+
+
 var x = document.getElementById("startWalking");
+
+
+
+function GeolocationControl(controlDiv, map) {
+
+        var controlUI = document.getElementById('mapbutt');
+
+        google.maps.event.addDomListener(controlUI, 'click', geolocate);
+}
+
+
+ var optn = {
+            enableHighAccuracy: true,
+            timeout: Infinity,
+            maximumAge:0
+
+        };
+
 
 function showError(error) {
     switch(error.code) {
@@ -40,27 +66,13 @@ function showError(error) {
 }
 
 
-function GeolocationControl(controlDiv, map) {
-
-        var controlUI = document.getElementById('mapbutt');
-
-        google.maps.event.addDomListener(controlUI, 'click', geolocate);
-}
-
-
-
 function geolocate() {
 
     if (navigator.geolocation) {
 
-        var optn = {
-            enableHighAccuracy: true,
-            timeout: Infinity,
-            maximumAge:0
+       
 
-        };
-
-        const watchId= navigator.geolocation.watchPosition(function (position, showError) {
+        const watchId= navigator.geolocation.watchPosition(function (position, showError, optn) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
 
@@ -77,6 +89,7 @@ function geolocate() {
             });
 
             marker.setMap(map);
+           
         }
          else{
                 marker.setPosition(pos);
@@ -88,16 +101,13 @@ function geolocate() {
             console.log('Changed coordinates: ', latitude, longitude);
             }
             
-            // else{
-            //     marker.setPosition(pos);
-
-            // }
+           
 
             map.setCenter(pos);
 
             document.getElementById("myNav").style.width = "0%";
             document.getElementById("mapbutt").style.display = "none";
-            document.getElementById("startWalking").style.display = "none";
+            
 
      
 
@@ -107,10 +117,32 @@ function geolocate() {
 
         
     } 
+
+     directionsDisplay.setMap(map);
+
+     var request = {
+           origin: 'Te Papa Tongarewa, Te Aro, Wellington, New Zealand', 
+           destination: 'National Library,Wellington, New Zealand',
+           travelMode: google.maps.DirectionsTravelMode.DRIVING
+         };
+    
+         directionsService.route(request, function(response, status) {
+           if (status == google.maps.DirectionsStatus.OK) {
+             directionsDisplay.setDirections(response);
+           }
+         });
   
 
 }
 
+// var onChangeHandler = function() {
+//           calculateAndDisplayRoute(directionsService, directionsDisplay);
+//         };
+//         // document.getElementById('start').addEventListener('change', onChangeHandler);
+//         // document.getElementById('end').addEventListener('change', onChangeHandler);
+      
+
+      
 
 initialize();
 
