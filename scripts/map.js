@@ -43,12 +43,12 @@ function GeolocationControl(controlDiv, map) {
 }
 
 
- var optn = {
-            enableHighAccuracy: true,
-            timeout: Infinity,
-            maximumAge:0
+ // var optn = {
+ //            enableHighAccuracy: true,
+ //            timeout: Infinity,
+ //            maximumAge:0
 
-        };
+ //        };
 
 
 function showError(error) {
@@ -75,7 +75,7 @@ function geolocate() {
 
        
 
-        const watchId= navigator.geolocation.watchPosition(function (position, showError, optn) {
+        const watchId= navigator.geolocation.watchPosition(function (position, showError) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
 
