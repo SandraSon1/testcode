@@ -4,6 +4,14 @@ var geomarker=null;
 var bounds = null;
 // var directionsService = null;
 // var directionsDisplay = null;
+ var stops = [
+      ['<h2 id="firstHeading" class="firstHeading">Te Papa</h2>'+'<p>...</p>', -41.29038375,174.78110235, 4],
+      ['<h2 id="firstHeading" class="firstHeading">Civiv Square</h2>'+'<p>...</p>', -41.2887477,174.7771535, 5],
+      ['<h2 id="firstHeading" class="firstHeading">Wellington Museum</h2>'+'<p>...</p>', -41.2851032,174.7780803, 3],
+      ['<h2 id="firstHeading" class="firstHeading">Parliament</h2>'+'<p>...</p>', -41.277848,174.7763921, 2],
+      ['<h2 id="firstHeading" class="firstHeading">National Library</h2>'+'<p>...</p>', -41.2768239,174.7779642, 1]
+    ];
+
 
 
  var mapOptions = {
@@ -13,13 +21,33 @@ var bounds = null;
 
         };
 
+  
+
 
 function initialize() {
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     bounds = new google.maps.LatLngBounds();
 
-
+var stopinfowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < stops.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(stops[i][1], stops[i][2]),
+        map: map
+      });
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          stopinfowindow.setContent(stops[i][0]);
+          stopinfowindow.open(map, marker);
+        }
+      })(marker, i));
+     
+        google.maps.event.addListener(marker, 'click', function() {
+          map.panTo(this.getPosition());
+          // map.setZoom(11);
+        });
+}
 
     // Create the DIV to hold the control and call the constructor passing in this DIV
     var geolocationDiv;
@@ -29,6 +57,8 @@ function initialize() {
       directionsDisplay = new google.maps.DirectionsRenderer;
 }
 
+
+   
 
 
 var x = document.getElementById("startWalking");
@@ -42,13 +72,6 @@ function GeolocationControl(controlDiv, map) {
         google.maps.event.addDomListener(controlUI, 'click', geolocate);
 }
 
-
- var optn = {
-            enableHighAccuracy: true,
-            timeout: Infinity,
-            maximumAge:0
-
-        };
 
 
 function showError(error) {
@@ -74,8 +97,15 @@ function geolocate() {
     if (navigator.geolocation) {
 
        
+ var optn = {
+            enableHighAccuracy: true,
+            timeout: Infinity,
+            maximumAge:0
 
-        const watchId= navigator.geolocation.watchPosition(function (position, showError, optn) {
+        };
+
+
+        const watchId= navigator.geolocation.watchPosition(function (position, showError) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
 
@@ -136,22 +166,26 @@ var directionsService = new google.maps.DirectionsService();
   var locations = [
   ['Te Papa', -41.29038375,174.78110235, 1],
   ['Civic Square', -41.2887477,174.7771535, 2],
-  ['City Council', -41.289111,174.776918, 3],
-  ['Frank kits park', -41.2863277,174.778877, 4],
-  ['Wellington Museum', -41.2851032,174.7780803, 5]
+  // ['City Council', -41.289111,174.776918, 3],
+  // ['Frank kits park', -41.2863277,174.778877, 4],
+  ['Wellington Museum', -41.2851032,174.7780803, 3],
   // ['supreme court ', -41.798551,174.7768211, 6],
   // ['Pipitea Law School ', -41.2788743,174.7785934, 7],
-  // ['Parliament', -41.277848,174.7763921, 8],
-  // ['National Library ', -41.2768239,174.7779642, 9]
+  ['Parliament', -41.277848,174.7763921, 4],
+  ['National Library ', -41.2768239,174.7779642, 5]
 ];
 
 
   // directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsDisplay = new google.maps.DirectionsRenderer({
-  suppressInfoWindows: true,
+  // suppressInfoWindows: true,
+  suppressMarkers:true,
+  infoWindow: myInfoWindow,
   map: map
 });
  directionsDisplay.setMap(map);
+
+ var myInfoWindow = new google.maps.InfoWindow();
   
   var infowindow = new google.maps.InfoWindow();
 
@@ -218,29 +252,30 @@ var directionsDisplay = new google.maps.DirectionsRenderer({
 
 initialize();
 
-       // Get the modal
-          var modal = document.getElementById('myModal');
 
-          // Get the button that opens the modal
-          var btn = document.getElementById("modalbutton");
+// Get the modal
+  var modal = document.getElementById('myModal');
 
-          // Get the <span> element that closes the modal
-          var span = document.getElementsByClassName("closemodal")[0];
+  // Get the button that opens the modal
+  var btn = document.getElementById("modalbutton");
 
-          // When the user clicks the button, open the modal 
-          btn.onclick = function() {
-              modal.style.display = "block";
-          }
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("closemodal")[0];
 
-          // When the user clicks on <span> (x), close the modal
-          span.onclick = function() {
-              modal.style.display = "none";
-          }
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
 
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-              if (event.target == modal) {
-                  modal.style.display = "none";
-              }
-          }
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
 

@@ -33,14 +33,12 @@ span {
   background-color: rgb(155,201,234);
 }
 .headerfont {
- font-family: 'Merienda', cursive;
- font-weight: lighter;
+  font-family:'Cormorant Garamond';
   color: white;
-  font-size: 1.8em;
+  font-size: 2.5em;
   font-style: oblique;
   margin: auto;
   margin-left: 4%;
-  letter-spacing: 0.04em;
   
 }
 .headerlogo {
@@ -52,11 +50,10 @@ span {
 }
 
 h1 {
-  font-family: 'Merienda', cursive;
-    
+  font-family:'Cormorant Garamond';
   color: white;
   font-weight: lighter;
-  font-size: 3.0em;
+  font-size: 3.7em;
   font-style: oblique;
   margin: auto;
   margin-left: 5%;
@@ -65,10 +62,10 @@ h1 {
   
 }
 .h1two {
-  font-family: 'Merienda', cursive;
+  font-family:'Cormorant Garamond';;
   color: white;
   font-weight: lighter;
-  font-size: 3.0em;
+  font-size: 3.7em;
   font-style: oblique;
   margin: auto;
   margin-top: -14.5%;
@@ -96,7 +93,7 @@ h1 {
   margin-right: 5%;
   margin-bottom: -9%;
   text-align: center;
- /* background-color: rgb(155,201,234);*/
+  background-color: rgb(155,201,234);
 }
 
 .button1 {
@@ -198,7 +195,7 @@ border: none;
   padding-left: 20px;
   padding-right: 20px;
   font-family: Roboto;
-  font-size: 1em;
+  font-size: 1.25em;
   border-radius: 12px;
   margin-top: 15%;
   margin-left: 2%;
@@ -282,6 +279,3 @@ background-color: rgb(155,201,234);
 
   
     }
-
-
-
