@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Sufragettes Walk</title>
+    <link rel="icon" href="images/logo.png" >
+    <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant Garamond" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+ 
+  
+    <body>
+
+    <!-- Mobile devices only  -->
+      <div class="desktop">
+        <center>
+          <h1 class="desktoph1">Suffragettes Walk</h1>
+          <p class="desktopp" > Only available on mobile devices. </p>
+          <img class="desktopimg" src="images/logo.png">
+        </center>
+      </div>
+
+      <div class="mobile">
+
+
+           <!-- overlay -->
+           <div id="myNav" class="overlay">
+                <div class="flex-container">
+                  <div>
+                      <a  class="button" id="mapbutt" >START JOURNEY</a>
+                  </div>
+                </div>
+            </div>
+
+
+           <!-- Header -->
+            <div class="headerbar"> 
+                <h1 class="headerfont">Suffragettes Walk</h1>
+                <a href="index.html">
+                  <img class="headerlogo" src="images/logo.png"> 
+                </a>  
+            </div>
+
+           
+            <!-- Trigger/Open The Modal -->
+            <button id="modalbutton">Information</button>
+            <!-- The Modal -->
+            <div id="myModal"  class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="closemodal">&times;</span>
+                  <div class="katediv">
+                      <img class="kate" src="images/kate.png">
+                  </div>
+                  <center>
+                    <p>Te Papa</p>
+                  
+                    <p> ... </p>
+                  </center>
+              </div>
+            </div>
+
+
+            <div id="map"></div>
+
+       
+
+      </div>
+
+       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAevtQ8Ww4oIAghz1p9fq7OLq_ctelbcJo">
+       </script>
+ 
+       <script src="scripts/map.js"></script> 
+
+    </body>
+
+</html>
