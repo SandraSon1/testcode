@@ -4,11 +4,15 @@ var geomarker=null;
 var bounds = null;
 // var directionsService = null;
 // var directionsDisplay = null;
+
+
  var stops = [
       ['<h2 id="firstHeading" class="firstHeading">Te Papa</h2>'+'<p>...</p>', -41.29038375,174.78110235, 4],
       ['<h2 id="firstHeading" class="firstHeading">Civiv Square</h2>'+'<p>...</p>', -41.2887477,174.7771535, 5],
       ['<h2 id="firstHeading" class="firstHeading">Wellington Museum</h2>'+'<p>...</p>', -41.2851032,174.7780803, 3],
       ['<h2 id="firstHeading" class="firstHeading">Parliament</h2>'+'<p>...</p>', -41.277848,174.7763921, 2],
+      ['<h2 id="firstHeading" class="firstHeading">City Council</h2>'+'<p>...</p>', -41.289111,174.776918, 6],
+      ['<h2 id="firstHeading" class="firstHeading">Pipitea Law School</h2>'+'<p>...</p>', -41.2788743,174.7785934, 7],
       ['<h2 id="firstHeading" class="firstHeading">National Library</h2>'+'<p>...</p>', -41.2768239,174.7779642, 1]
     ];
 
@@ -45,7 +49,7 @@ var stopinfowindow = new google.maps.InfoWindow();
      
         google.maps.event.addListener(marker, 'click', function() {
           map.panTo(this.getPosition());
-          // map.setZoom(11);
+          map.setZoom(16);
         });
 }
 
@@ -73,8 +77,7 @@ function GeolocationControl(controlDiv, map) {
 }
 
 
-<<<<<<< HEAD
-=======
+
  // var optn = {
  //            enableHighAccuracy: true,
  //            timeout: Infinity,
@@ -82,7 +85,7 @@ function GeolocationControl(controlDiv, map) {
 
  //        };
 
->>>>>>> 5945d9825ffe76646fb0121225181262900a1fa5
+
 
 function showError(error) {
     switch(error.code) {
@@ -114,10 +117,7 @@ function geolocate() {
 
         };
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5945d9825ffe76646fb0121225181262900a1fa5
         const watchId= navigator.geolocation.watchPosition(function (position, showError) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
@@ -166,36 +166,23 @@ function geolocate() {
 
 
 
-// var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
-// var locations = [
-//   ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-//   ['Bondi Beach', -33.890542, 151.274856, 4],
-//   ['Coogee Beach', -33.923036, 151.259052, 5],
-//   ['Maroubra Beach', -33.950198, 151.259302, 1],
-//   ['Cronulla Beach', -34.028249, 151.157507, 3]
-// ];
+
 
   var locations = [
   ['Te Papa', -41.29038375,174.78110235, 1],
   ['Civic Square', -41.2887477,174.7771535, 2],
-  // ['City Council', -41.289111,174.776918, 3],
-  // ['Frank kits park', -41.2863277,174.778877, 4],
   ['Wellington Museum', -41.2851032,174.7780803, 3],
-  // ['supreme court ', -41.798551,174.7768211, 6],
-  // ['Pipitea Law School ', -41.2788743,174.7785934, 7],
   ['Parliament', -41.277848,174.7763921, 4],
   ['National Library ', -41.2768239,174.7779642, 5]
 ];
 
-
-  // directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsDisplay = new google.maps.DirectionsRenderer({
-  // suppressInfoWindows: true,
   suppressMarkers:true,
   infoWindow: myInfoWindow,
   map: map
 });
+
  directionsDisplay.setMap(map);
 
  var myInfoWindow = new google.maps.InfoWindow();
@@ -238,27 +225,9 @@ var directionsDisplay = new google.maps.DirectionsRenderer({
   });
 
 
-
-     // var request = {
-     //       origin: 'Te Papa Tongarewa, Te Aro, Wellington, New Zealand', 
-     //       destination: 'National Library,Wellington, New Zealand',
-     //       travelMode: google.maps.DirectionsTravelMode.DRIVING
-     //     };
-    
-     //     directionsService.route(request, function(response, status) {
-     //       if (status == google.maps.DirectionsStatus.OK) {
-     //         directionsDisplay.setDirections(response);
-     //       }
-     //     });
-  
-
 }
 
-// var onChangeHandler = function() {
-//           calculateAndDisplayRoute(directionsService, directionsDisplay);
-//         };
-//         // document.getElementById('start').addEventListener('change', onChangeHandler);
-//         // document.getElementById('end').addEventListener('change', onChangeHandler);
+
       
 
       
