@@ -73,6 +73,16 @@ function GeolocationControl(controlDiv, map) {
 }
 
 
+<<<<<<< HEAD
+=======
+ // var optn = {
+ //            enableHighAccuracy: true,
+ //            timeout: Infinity,
+ //            maximumAge:0
+
+ //        };
+
+>>>>>>> 5945d9825ffe76646fb0121225181262900a1fa5
 
 function showError(error) {
     switch(error.code) {
@@ -104,7 +114,10 @@ function geolocate() {
 
         };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5945d9825ffe76646fb0121225181262900a1fa5
         const watchId= navigator.geolocation.watchPosition(function (position, showError) {
         window.localStorage.setItem('lastWatch', watchId);
         console.log('Set watchId', watchId);
