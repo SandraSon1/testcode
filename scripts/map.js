@@ -7,7 +7,7 @@ var bounds = null;
 
 
  var stops = [
-      ['<h2 id="firstHeading" class="firstHeading">Te Papa</h2>'+'<p>...</p>', -41.29038375,174.78110235, 4],
+      ['<h2 id="firstHeading" class="firstHeading">Te Papa</h2>'+'<p>...</p> ', -41.29038375,174.78110235, 4],
       ['<h2 id="firstHeading" class="firstHeading">Civiv Square</h2>'+'<p>...</p>', -41.2887477,174.7771535, 5],
       ['<h2 id="firstHeading" class="firstHeading">Wellington Museum</h2>'+'<p>...</p>', -41.2851032,174.7780803, 3],
       ['<h2 id="firstHeading" class="firstHeading">Parliament</h2>'+'<p>...</p>', -41.277848,174.7763921, 2],
@@ -35,15 +35,19 @@ function initialize() {
 
 var stopinfowindow = new google.maps.InfoWindow();
     var marker, i;
+
     for (i = 0; i < stops.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(stops[i][1], stops[i][2]),
         map: map
       });
+
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           stopinfowindow.setContent(stops[i][0]);
-          stopinfowindow.open(map, marker);
+          ib.setContent(stops[i][0]);
+          // ib.open(map, this);
+          // stopinfowindow.open(map, marker);
         }
       })(marker, i));
      
@@ -51,7 +55,43 @@ var stopinfowindow = new google.maps.InfoWindow();
           map.panTo(this.getPosition());
           map.setZoom(16);
         });
+
+var ib = new InfoBox(myOptions);
+
+// var boxText = '<div id= "container-infobox"'
+
+var myOptions = {
+// content: boxText,
+disableAutoPan: false
+,maxWidth: 10
+,pixelOffset: new google.maps.Size(-125, -60)
+,zIndex: null
+,boxStyle: { 
+// border: "1px solid black"
+
+WebkitBorderRadius: "10px"
+,padding: "10px 10px 10px 10px"
+,WebkitBoxShadow: "3px 3px 5px 800px rgba(0,0,0,0.6)"
+,background: "white"
+,opacity: 1
+,width: "250px"
 }
+,closeBoxMargin: "2px 2px 2px 1px"
+,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+,infoBoxClearance: new google.maps.Size(1, 1)
+,isHidden: false
+,pane: "floatPane"
+,enableEventPropagation: false
+};
+
+google.maps.event.addListener(marker, "click", function (e) {
+ib.open(map, this);
+});
+
+// ib.open(map, marker);
+}
+
+
 
     // Create the DIV to hold the control and call the constructor passing in this DIV
     var geolocationDiv;
@@ -227,21 +267,12 @@ var directionsDisplay = new google.maps.DirectionsRenderer({
 
 }
 
-
-      
-
-      
-
 initialize();
 
 
 // Get the modal
   var modal = document.getElementById('myModal');
-
-  // Get the button that opens the modal
   var btn = document.getElementById("modalbutton");
-
-  // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("closemodal")[0];
 
   // When the user clicks the button, open the modal 
