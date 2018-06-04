@@ -56,37 +56,37 @@ var stopinfowindow = new google.maps.InfoWindow();
           map.setZoom(16);
         });
 
-var ib = new InfoBox(myOptions);
+  var ib = new InfoBox(myOptions);
 
 // var boxText = '<div id= "container-infobox"'
 
-var myOptions = {
-// content: boxText,
-disableAutoPan: false
-,maxWidth: 10
-,pixelOffset: new google.maps.Size(-125, -60)
-,zIndex: null
-,boxStyle: { 
-// border: "1px solid black"
+    var myOptions = {
+    // content: boxText,
+    disableAutoPan: false
+    ,maxWidth: 10
+    ,pixelOffset: new google.maps.Size(-125, -60)
+    ,zIndex: null
+    ,boxStyle: { 
+    // border: "1px solid black"
 
-WebkitBorderRadius: "10px"
-,padding: "10px 10px 10px 10px"
-,WebkitBoxShadow: "3px 3px 5px 800px rgba(0,0,0,0.6)"
-,background: "white"
-,opacity: 1
-,width: "250px"
-}
-,closeBoxMargin: "2px 2px 2px 1px"
-,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-,infoBoxClearance: new google.maps.Size(1, 1)
-,isHidden: false
-,pane: "floatPane"
-,enableEventPropagation: false
-};
+    WebkitBorderRadius: "10px"
+    ,padding: "10px 10px 10px 10px"
+    ,WebkitBoxShadow: "3px 3px 5px 800px rgba(0,0,0,0.6)"
+    ,background: "white"
+    ,opacity: 1
+    ,width: "250px"
+    }
+    ,closeBoxMargin: "2px 2px 2px 1px"
+    ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+    ,infoBoxClearance: new google.maps.Size(1, 1)
+    ,isHidden: false
+    ,pane: "floatPane"
+    ,enableEventPropagation: false
+    };
 
-google.maps.event.addListener(marker, "click", function (e) {
-ib.open(map, this);
-});
+    google.maps.event.addListener(marker, "click", function (e) {
+    ib.open(map, this);
+    });
 
 // ib.open(map, marker);
 }
@@ -157,6 +157,13 @@ function geolocate() {
 
         };
 
+   function launch_toast() {
+    var x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+}
+
+
 
         const watchId= navigator.geolocation.watchPosition(function (position, showError) {
         window.localStorage.setItem('lastWatch', watchId);
@@ -190,6 +197,7 @@ function geolocate() {
            
 
             map.setCenter(pos);
+            launch_toast();
 
             document.getElementById("myNav").style.width = "0%";
             document.getElementById("mapbutt").style.display = "none";
@@ -291,4 +299,7 @@ initialize();
           modal.style.display = "none";
       }
   }
+
+
+
 
